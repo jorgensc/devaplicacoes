@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Funcionário</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f8;
+        }
+        .card {
+            border-radius: 10px;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Cadastro de Funcionário</h4>
+                </div>
+
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Nome -->
+                        <div class="mb-3">
+                            <label class="form-label">Nome Completo</label>
+                            <input
+                                type="text"
+                                name="nome"
+                                class="form-control"
+                                placeholder="Digite o nome completo"
+                                value="{{ form.nome.value|default_if_none:'' }}"
+                                required>
+                        </div>
+
+                        <!-- CPF -->
+                        <div class="mb-3">
+                            <label class="form-label">CPF</label>
+                            <input
+                                type="text"
+                                name="cpf"
+                                class="form-control"
+                                placeholder="000.000.000-00"
+                                pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                                title="Formato esperado: 000.000.000-00"
+                                value="{{ form.cpf.value|default_if_none:'' }}"
+                                required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">E-mail</label>
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                placeholder="exemplo@email.com"
+                                value="{{ form.email.value|default_if_none:'' }}"
+                                required>
+                        </div>
+
+                        <!-- Remuneração -->
+                        <div class="mb-3">
+                            <label class="form-label">Remuneração (R$)</label>
+                            <input
+                                type="number"
+                                name="remuneracao"
+                                class="form-control"
+                                min="0"
+                                step="0.01"
+                                placeholder="Ex: 2500.00"
+                                value="{{ form.remuneracao.value|default_if_none:'' }}"
+                                required>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-success">
+                                Salvar Funcionário
+                            </button>
+                            <a href="/app/lista_funcionarios/" class="btn btn-outline-secondary">
+                                Voltar para Lista
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
